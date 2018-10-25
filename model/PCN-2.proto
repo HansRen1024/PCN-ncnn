@@ -1,0 +1,19 @@
+7767517
+17 19
+Input            data             0 1 data 0=24 1=24 2=3
+Convolution      conv1_2          1 1 data conv1_2 0=20 1=3 2=1 3=1 4=0 5=1 6=540
+Pooling          pool1_2          1 1 conv1_2 pool1_2 0=0 1=3 2=2 3=0 4=0
+ReLU             relu1_2          1 1 pool1_2 pool1_2_relu1_2
+Convolution      conv2_2          1 1 pool1_2_relu1_2 conv2_2 0=40 1=3 2=1 3=1 4=0 5=1 6=7200
+Pooling          pool2_2          1 1 conv2_2 pool2_2 0=0 1=3 2=2 3=0 4=0
+ReLU             relu2_2          1 1 pool2_2 pool2_2_relu2_2
+Convolution      conv3_2          1 1 pool2_2_relu2_2 conv3_2 0=70 1=2 2=1 3=1 4=0 5=1 6=11200
+ReLU             relu3_2          1 1 conv3_2 conv3_2_relu3_2
+InnerProduct     fc4_2            1 1 conv3_2_relu3_2 fc4_2 0=140 1=1 2=88200
+ReLU             relu4_2          1 1 fc4_2 fc4_2_relu4_2
+Split            splitncnn_0      1 3 fc4_2_relu4_2 fc4_2_relu4_2_splitncnn_0 fc4_2_relu4_2_splitncnn_1 fc4_2_relu4_2_splitncnn_2
+InnerProduct     fc5_2            1 1 fc4_2_relu4_2_splitncnn_2 fc5_2 0=2 1=1 2=280
+Softmax          cls_prob         1 1 fc5_2 cls_prob 0=0
+InnerProduct     fc6_2            1 1 fc4_2_relu4_2_splitncnn_1 fc6_2 0=3 1=1 2=420
+Softmax          rotate_cls_prob  1 1 fc6_2 rotate_cls_prob 0=0
+InnerProduct     bbox_reg_2       1 1 fc4_2_relu4_2_splitncnn_0 bbox_reg_2 0=3 1=1 2=420
